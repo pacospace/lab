@@ -4,10 +4,29 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-networkx = "*"
+ipython = "*"
+ipykernel = "*"
 requests = "*"
+
+networkx = "*"
+
 pandas = "*"
-plotly = "*"
+pandas-profiling = "*"
+
+prettyprinter = "*"
+
+# visualizations
+plotly = "==3.6.1"
+cufflinks = "*"
+matplotlib = "*"
+
+# nbextensions
+jupyter-require = "*"
+jupyter_contrib_nbextensions = "*"  # needed by pipenv shell
 
 [dev-packages]
 coala-bears = "*"
+autopep8 = "*"
+
+[requires]
+python_version = "3.6"

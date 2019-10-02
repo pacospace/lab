@@ -1,6 +1,9 @@
 import os
-from setuptools import setup
+
 from pathlib import Path
+
+from setuptools import find_packages
+from setuptools import setup
 
 
 def get_install_requires():
@@ -21,17 +24,26 @@ def get_version():
     raise ValueError("No version identifier found")
 
 
+VERSION = get_version()
 setup(
     name='thoth-lab',
-    version=get_version(),
+    version=VERSION,
     description='Code for Thoth experiments in Jupyter notebooks.',
     long_description=Path('README.rst').read_text(),
     author='Fridolin Pokorny',
     author_email='fridolin@redhat.com',
     license='GPLv3+',
     packages=[
-        'thoth.lab',
+        'thoth.{subpackage}'.format(subpackage=p)
+        for p in find_packages('thoth/')
     ],
+    include_package_data=True,
+    install_requires=get_install_requires(),
     zip_safe=False,
-    install_requires=get_install_requires()
+    command_options={
+        'build_sphinx': {
+            'version': ('setup.py', VERSION),
+            'release': ('setup.py', VERSION),
+        }
+    },
 )
